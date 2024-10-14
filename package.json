@@ -1,15 +1,17 @@
 {
   "name": "natify-web-bridge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "natify-web-bridge is a versatile npm package that enables seamless interaction between web-based applications and native mobile functionality provided by natify. It allows developers to trigger native device features—such as camera access, GPS, and notifications—directly from their web app, providing a smooth integration between web content and mobile environments.This package simplifies communication between the web and native layers, making it easy to enhance web apps with the power of native mobile features.",
-  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mr-Mahabeer/natify-web-bridge.git"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "natify",
     "natify-web-sdk",
@@ -26,6 +28,7 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^5.0.0"
+    "babel-plugin-module-resolver": "^5.0.0",
+    "typescript": "^5.6.3"
   }
 }

@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react"
-  }
+    "outDir": "./dist",       // Output directory for compiled JS
+    "module": "CommonJS",     // Use CommonJS modules
+    "target": "ES6",          // Target ECMAScript version
+    "declaration": true,      // Generate .d.ts files
+    "esModuleInterop": true   // Enable ES modules interoperability
+  },
+  "include": ["src/**/*"]
 }
