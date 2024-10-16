@@ -1,3 +1,35 @@
+export enum HapticFeedbackTypes {
+  selection = "selection",
+  impactLight = "impactLight",
+  impactMedium = "impactMedium",
+  impactHeavy = "impactHeavy",
+  rigid = "rigid",
+  soft = "soft",
+  notificationSuccess = "notificationSuccess",
+  notificationWarning = "notificationWarning",
+  notificationError = "notificationError",
+  clockTick = "clockTick",
+  contextClick = "contextClick",
+  keyboardPress = "keyboardPress",
+  keyboardRelease = "keyboardRelease",
+  keyboardTap = "keyboardTap",
+  longPress = "longPress",
+  textHandleMove = "textHandleMove",
+  virtualKey = "virtualKey",
+  virtualKeyRelease = "virtualKeyRelease",
+  effectClick = "effectClick",
+  effectDoubleClick = "effectDoubleClick",
+  effectHeavyClick = "effectHeavyClick",
+  effectTick = "effectTick",
+}
+
+export interface NativeToastProps {
+  type: "normal" | "success" | "danger" | "warning";
+  duration?: number;
+  placement?: "top" | "bottom" | "center";
+  message: string;
+}
+
 const changeStatusBarColor = (color: string) => {
   try {
     window.ReactNativeWebView.postMessage(
@@ -41,12 +73,6 @@ const nativeShare = (message = "") => {
   }
 };
 
-export interface NativeToastProps {
-  type: "normal" | "success" | "danger" | "warning";
-  duration?: number;
-  placement?: "top" | "bottom" | "center";
-  message: string;
-}
 const showNativeToast = ({
   type,
   duration = 2000,
@@ -68,7 +94,28 @@ const showNativeToast = ({
   }
 };
 
-export { changeStatusBarColor, showNativeAlert, nativeShare, showNativeToast };
+const hepticFeedBack = (
+  type: HapticFeedbackTypes = HapticFeedbackTypes.impactLight
+) => {
+  try {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        event: "vibrate",
+        type,
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  changeStatusBarColor,
+  showNativeAlert,
+  nativeShare,
+  showNativeToast,
+  hepticFeedBack,
+};
 
 declare global {
   interface Window {

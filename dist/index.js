@@ -1,6 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.showNativeToast = exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = void 0;
+exports.hepticFeedBack = exports.showNativeToast = exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = exports.HapticFeedbackTypes = void 0;
+var HapticFeedbackTypes;
+(function (HapticFeedbackTypes) {
+    HapticFeedbackTypes["selection"] = "selection";
+    HapticFeedbackTypes["impactLight"] = "impactLight";
+    HapticFeedbackTypes["impactMedium"] = "impactMedium";
+    HapticFeedbackTypes["impactHeavy"] = "impactHeavy";
+    HapticFeedbackTypes["rigid"] = "rigid";
+    HapticFeedbackTypes["soft"] = "soft";
+    HapticFeedbackTypes["notificationSuccess"] = "notificationSuccess";
+    HapticFeedbackTypes["notificationWarning"] = "notificationWarning";
+    HapticFeedbackTypes["notificationError"] = "notificationError";
+    HapticFeedbackTypes["clockTick"] = "clockTick";
+    HapticFeedbackTypes["contextClick"] = "contextClick";
+    HapticFeedbackTypes["keyboardPress"] = "keyboardPress";
+    HapticFeedbackTypes["keyboardRelease"] = "keyboardRelease";
+    HapticFeedbackTypes["keyboardTap"] = "keyboardTap";
+    HapticFeedbackTypes["longPress"] = "longPress";
+    HapticFeedbackTypes["textHandleMove"] = "textHandleMove";
+    HapticFeedbackTypes["virtualKey"] = "virtualKey";
+    HapticFeedbackTypes["virtualKeyRelease"] = "virtualKeyRelease";
+    HapticFeedbackTypes["effectClick"] = "effectClick";
+    HapticFeedbackTypes["effectDoubleClick"] = "effectDoubleClick";
+    HapticFeedbackTypes["effectHeavyClick"] = "effectHeavyClick";
+    HapticFeedbackTypes["effectTick"] = "effectTick";
+})(HapticFeedbackTypes || (exports.HapticFeedbackTypes = HapticFeedbackTypes = {}));
 const changeStatusBarColor = (color) => {
     try {
         window.ReactNativeWebView.postMessage(JSON.stringify({ event: "barColor", color }));
@@ -50,3 +75,15 @@ const showNativeToast = ({ type, duration = 2000, placement = "top", message, })
     }
 };
 exports.showNativeToast = showNativeToast;
+const hepticFeedBack = (type = HapticFeedbackTypes.impactLight) => {
+    try {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            event: "vibrate",
+            type,
+        }));
+    }
+    catch (error) {
+        throw error;
+    }
+};
+exports.hepticFeedBack = hepticFeedBack;
