@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = void 0;
+exports.showNativeToast = exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = void 0;
 const changeStatusBarColor = (color) => {
     try {
         window.ReactNativeWebView.postMessage(JSON.stringify({ event: "barColor", color }));
@@ -35,3 +35,18 @@ const nativeShare = (message = "") => {
     }
 };
 exports.nativeShare = nativeShare;
+const showNativeToast = ({ type, duration = 2000, placement = "top", message, }) => {
+    try {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            event: "nativeToast",
+            type,
+            duration,
+            placement,
+            message,
+        }));
+    }
+    catch (error) {
+        throw error;
+    }
+};
+exports.showNativeToast = showNativeToast;
