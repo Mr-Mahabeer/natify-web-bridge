@@ -28,7 +28,20 @@ const showNativeAlert = ({
   }
 };
 
-export { changeStatusBarColor, showNativeAlert };
+const nativeShare = (message = "") => {
+  try {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        event: "shareExternal",
+        message,
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { changeStatusBarColor, showNativeAlert, nativeShare };
 
 declare global {
   interface Window {

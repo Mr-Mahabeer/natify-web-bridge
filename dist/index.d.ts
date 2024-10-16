@@ -3,7 +3,8 @@ declare const showNativeAlert: ({ title, description, }: {
     title: string;
     description: string;
 }) => void;
-export { changeStatusBarColor, showNativeAlert };
+declare const nativeShare: (message?: string) => void;
+export { changeStatusBarColor, showNativeAlert, nativeShare };
 declare global {
     interface Window {
         ReactNativeWebView: {
