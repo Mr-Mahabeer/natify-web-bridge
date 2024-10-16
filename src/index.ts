@@ -23,6 +23,12 @@ export enum HapticFeedbackTypes {
   effectTick = "effectTick",
 }
 
+export interface SaveDataProps {
+  key: string;
+  value: string;
+  showToast?: boolean;
+}
+
 export interface NativeToastProps {
   type: "normal" | "success" | "danger" | "warning";
   duration?: number;
@@ -109,12 +115,41 @@ const hepticFeedBack = (
   }
 };
 
+const saveData = ({ key, value, showToast = false }: SaveDataProps) => {
+  try {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        event: "storeItem",
+        key,
+        value,
+        showToast,
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+const openDeviceSettings = () => {
+  try {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        event: "openSettings",
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   changeStatusBarColor,
   showNativeAlert,
   nativeShare,
   showNativeToast,
   hepticFeedBack,
+  saveData,
+  openDeviceSettings,
 };
 
 declare global {

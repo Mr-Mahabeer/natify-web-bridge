@@ -22,6 +22,11 @@ export declare enum HapticFeedbackTypes {
     effectHeavyClick = "effectHeavyClick",
     effectTick = "effectTick"
 }
+export interface SaveDataProps {
+    key: string;
+    value: string;
+    showToast?: boolean;
+}
 export interface NativeToastProps {
     type: "normal" | "success" | "danger" | "warning";
     duration?: number;
@@ -36,7 +41,9 @@ declare const showNativeAlert: ({ title, description, }: {
 declare const nativeShare: (message?: string) => void;
 declare const showNativeToast: ({ type, duration, placement, message, }: NativeToastProps) => void;
 declare const hepticFeedBack: (type?: HapticFeedbackTypes) => void;
-export { changeStatusBarColor, showNativeAlert, nativeShare, showNativeToast, hepticFeedBack, };
+declare const saveData: ({ key, value, showToast }: SaveDataProps) => void;
+declare const openDeviceSettings: () => void;
+export { changeStatusBarColor, showNativeAlert, nativeShare, showNativeToast, hepticFeedBack, saveData, openDeviceSettings, };
 declare global {
     interface Window {
         ReactNativeWebView: {

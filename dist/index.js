@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hepticFeedBack = exports.showNativeToast = exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = exports.HapticFeedbackTypes = void 0;
+exports.openDeviceSettings = exports.saveData = exports.hepticFeedBack = exports.showNativeToast = exports.nativeShare = exports.showNativeAlert = exports.changeStatusBarColor = exports.HapticFeedbackTypes = void 0;
 var HapticFeedbackTypes;
 (function (HapticFeedbackTypes) {
     HapticFeedbackTypes["selection"] = "selection";
@@ -87,3 +87,28 @@ const hepticFeedBack = (type = HapticFeedbackTypes.impactLight) => {
     }
 };
 exports.hepticFeedBack = hepticFeedBack;
+const saveData = ({ key, value, showToast = false }) => {
+    try {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            event: "storeItem",
+            key,
+            value,
+            showToast,
+        }));
+    }
+    catch (error) {
+        throw error;
+    }
+};
+exports.saveData = saveData;
+const openDeviceSettings = () => {
+    try {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            event: "openSettings",
+        }));
+    }
+    catch (error) {
+        throw error;
+    }
+};
+exports.openDeviceSettings = openDeviceSettings;
