@@ -1,9 +1,5 @@
 const changeStatusBarColor = (color: string) => {
   try {
-    if (!color) {
-      return;
-    }
-
     window.ReactNativeWebView.postMessage(
       JSON.stringify({ event: "barColor", color })
     );
@@ -12,7 +8,27 @@ const changeStatusBarColor = (color: string) => {
   }
 };
 
-export { changeStatusBarColor };
+const showNativeAlert = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
+  try {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({
+        event: "alert",
+        title,
+        description,
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { changeStatusBarColor, showNativeAlert };
 
 declare global {
   interface Window {
